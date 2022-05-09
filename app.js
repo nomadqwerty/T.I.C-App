@@ -24,7 +24,7 @@ if(process.env.NODE_ENV==='developement') {
   ;
 // express middleware
 app.use(express.json());
-
+// midlewar for req time
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
    next();
