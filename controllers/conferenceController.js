@@ -1,9 +1,9 @@
 // 3rd party
 const express = require('express');
-
 // service model
-const Conference = require('../models/conferenceModel')
+const AppError = require('../utils/AppError')
 const ApiFeatures = require('../utils/ApiFeatures')
+const Conference = require('../models/conferenceModel')
 const catchAsync = require('../utils/catchAsync')
 /////////////////////
 // request handlers(Hnd)CRUD OPS

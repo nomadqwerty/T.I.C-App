@@ -4,8 +4,9 @@ const fs = require('fs');
 const express = require('express');
 
 // Training model
-const Training = require('../models/trainingModel')
 const ApiFeatures = require('../utils/ApiFeatures')
+const AppError = require('../utils/AppError')
+const Training = require('../models/trainingModel')
 const catchAsync = require('../utils/catchAsync')
 
 

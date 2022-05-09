@@ -7,6 +7,7 @@ const express = require('express');
 const Department = require('../models/departmentModel')
 const ApiFeatures = require('../utils/ApiFeatures')
 const catchAsync = require('../utils/catchAsync')
+const AppError = require('../utils/AppError')
 
 /////////////////////
 // request handlers(Hnd)CRUD OPS
@@ -87,7 +88,7 @@ exports.updateDepartmentHnd = catchAsync(async (req, res, next) => {
 ///////////////
 // DELETE request
 exports.deleteDepartmentHnd = catchAsync(async (req, res, next) => { 
-    const deparment = await Department.findByIdAndDelete(req.params.id) 
+    const department = await Department.findByIdAndDelete(req.params.id) 
 
     if(!department){
       return next(new AppError('failed to delete department',404))
