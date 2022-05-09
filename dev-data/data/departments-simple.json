@@ -1,0 +1,26 @@
+[
+    {
+        "name":"impact choir department",
+        "meetings":"1",
+        "description":"join impact choir",
+        "summary":"a department",
+        "imageCover":"./pics",
+        "images":""
+    },
+    {
+        "name":"impact usher department",
+        "meetings":"1",
+        "description":"join impact usher",
+        "summary":"a department",
+        "imageCover":"./pics",
+        "images":""
+    },
+    {
+        "name":"impact sanitation department",
+        "meetings":"1",
+        "description":"join impact sanitation",
+        "summary":"a department",
+        "imageCover":"./pics",
+        "images":""
+    }
+]

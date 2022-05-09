@@ -1,0 +1,38 @@
+[
+    {
+        "name":"impact basic training",
+        "trainingType":"basic",
+        "sessions":"4",
+        "duration":"5",
+        "startTime":"7:00AM",
+        "date":"every saturday",
+        "description":"join impact basic training",
+        "summary":"the special training",
+        "imageCover":"./pics",
+        "images":""
+    },
+    {
+        "name":"impact advanced training",
+        "trainingType":"advanced",
+        "sessions":"4",
+        "duration":"5",
+        "startTime":"7:00AM",
+        "date":"every saturday",
+        "description":"join impact advanced training",
+        "summary":"the special training",
+        "imageCover":"./pics",
+        "images":""
+    },
+    {
+        "name":"impact ministry training",
+        "trainingType":"ministry",
+        "sessions":"4",
+        "duration":"5",
+        "startTime":"7:00AM",
+        "date":"every saturday",
+        "description":"join impact ministry training",
+        "summary":"the special training",
+        "imageCover":"./pics",
+        "images":""
+    }
+]

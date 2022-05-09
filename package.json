@@ -1,0 +1,23 @@
+{
+  "name": "impact",
+  "version": "1.0.0",
+  "description": "impact church site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "supervisor server.js",
+    "start:prod": "set NODE_ENV=production& supervisor server.js"
+  },
+  "author": "David",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.14",
+    "morgan": "^1.10.0",
+    "slugify": "^1.6.5",
+    "validator": "^13.7.0"
+  }
+}

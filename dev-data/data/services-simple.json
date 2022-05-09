@@ -1,0 +1,41 @@
+[
+    {
+        "name":"impact sunday service",
+        "serviceType":"sermon",
+        "services":"3",
+        "duration":"6",
+        "startTime":"7:00AM",
+        "date":"sundays",
+        "dateIndex":"0",
+        "description":"join impact sunday service",
+        "summary":"the special service",
+        "imageCover":"./pics",
+        "images":""
+    },
+    {
+        "name":"impact tuesday service",
+        "serviceType":"sermon",
+        "services":"1",
+        "duration":"2",
+        "startTime":"7:00AM",
+        "date":"tuesdays",
+        "dateIndex":"2",
+        "description":"join impact tuesday service",
+        "summary":"the special service",
+        "imageCover":"./pics",
+        "images":""
+    },
+    {
+        "name":"impact thursday service",
+        "serviceType":"sermon",
+        "services":"1",
+        "duration":"2",
+        "startTime":"7:00AM",
+        "date":"thursday",
+        "dateIndex":"4",
+        "description":"join impact thursday service",
+        "summary":"the special service",
+        "imageCover":"./pics",
+        "images":""
+    }
+]

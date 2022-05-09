@@ -1,0 +1,38 @@
+[
+    {
+        "name":"impact men's conference",
+        "conferenceType":"training",
+        "services":"1",
+        "duration":"2",
+        "startTime":"7:00AM",
+        "date":"2022-04-19T08:43:31.096Z",
+        "description":"join impact men's conference",
+        "summary":"the special conference",
+        "imageCover":"./pics",
+        "images":""
+    },
+    {
+        "name":"impact women's conference",
+        "conferenceType":"training",
+        "services":"1",
+        "duration":"2",
+        "startTime":"7:00AM",
+        "date":"2022-04-19T08:43:31.096Z",
+        "description":"join impact women's conference",
+        "summary":"the special conference",
+        "imageCover":"./pics",
+        "images":""
+    },
+    {
+        "name":"impact january conference",
+        "conferenceType":"training",
+        "services":"3",
+        "duration":"6",
+        "startTime":"7:00AM",
+        "date":"2022-04-19T08:43:31.096Z",
+        "description":"join impact january conference",
+        "summary":"the special conference",
+        "imageCover":"./pics",
+        "images":""
+    }
+]
