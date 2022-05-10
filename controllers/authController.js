@@ -22,7 +22,8 @@ exports.signUp = catchAsync( async (req,res,next)=>{
        name:req.body.name,
        email:req.body.email,
        password:req.body.password,
-       passwordConfirm:req.body.passwordConfirm
+       passwordConfirm:req.body.passwordConfirm,
+       passwordChangedAt:req.body.passwordChangedAt
    }) 
 
 //    create JWT for auth
@@ -90,6 +91,13 @@ exports.protect = catchAsync(async (req,res,next)=>{
     if(!freshUser){
         return next(new AppError('this user no longer exists',401))
     }
+    // check if user changedpassword after jwt was issued
+    let passwordWasChanged =  freshUser.passwordChanged(decoded.iat)
 
+    if(passwordWasChanged){
+        return next(new AppError('User currently changed password,please login again',401))
+    }
+    req.user = freshUser
+    // access protected routes
     next()
 })
