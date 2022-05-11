@@ -23,7 +23,8 @@ exports.signUp = catchAsync( async (req,res,next)=>{
        email:req.body.email,
        password:req.body.password,
        passwordConfirm:req.body.passwordConfirm,
-       passwordChangedAt:req.body.passwordChangedAt
+       passwordChangedAt:req.body.passwordChangedAt,
+       role:req.body.role
    }) 
 
 //    create JWT for auth
@@ -72,6 +73,7 @@ exports.login = catchAsync( async (req,res,next)=>{
 
 })
 
+// protect middleware: check if user logged in
 exports.protect = catchAsync(async (req,res,next)=>{
     let token
     // check for token in headers
@@ -100,4 +102,29 @@ exports.protect = catchAsync(async (req,res,next)=>{
     req.user = freshUser
     // access protected routes
     next()
+})
+
+// restrict middleware
+exports.restrictTo = (...roles)=>{
+    return (req,res,next)=>{
+        if(!roles.includes(req.user.role)){
+            return next(new AppError('you cannot perform this action',403))
+        }
+        next()
+    }
+}
+
+exports.forgotPassword = catchAsync(async (req,res,next)=>{
+    const user = await User.findOne({email:req.body.email})
+
+    if(!user){
+        return next(new AppError('user does not exist',404))
+    }
+
+    const token = user.createPasswordResetToken()
+
+    // turn off validation
+    await user.save({validateBeforeSave:false})
+
+    console.log(user)
 })

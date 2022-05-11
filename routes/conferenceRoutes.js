@@ -21,6 +21,6 @@ conferenceRouter
   .route('/:id')
   .get(conferenceController.getConferenceHnd)
   .patch(conferenceController.updateConferencehnd)
-  .delete(conferenceController.deleteConferenceHnd);
+  .delete(authController.protect,authController.restrictTo('admin','lead-pastor'),conferenceController.deleteConferenceHnd);
 
 module.exports = conferenceRouter;

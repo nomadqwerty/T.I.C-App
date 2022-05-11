@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const slugify = require('slugify')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
+const crypto = require('crypto')
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -14,6 +15,11 @@ const userSchema = new mongoose.Schema({
         unique:true,
         lowerCase:true,
         validate:[validator.isEmail,'Please use a valid email']
+    },
+    role:{
+        type:String,
+        enum:['member','admin','pastor','lead-pastor'],
+        default:'member'
     },
     photo:String,
     password:{
@@ -34,7 +40,9 @@ const userSchema = new mongoose.Schema({
     },
     passwordChangedAt:{
         type:Date
-    }
+    },
+    passwordResetToken:String,
+    passwordResetExpires:Date
 
 })
 
@@ -63,6 +71,15 @@ userSchema.methods.passwordChanged = function(JWTtimeStamp){
         return JWTtimeStamp < timeStamp
     }
     return false
+}
+userSchema.methods.createPasswordResetToken = function(){
+    let token = crypto.randomBytes(32).toString('hex')
+
+    this.passwordResetToken = crypto.createHash('sha256').update(token).digest('hex')
+
+    this.passwordResetExpires = Date.now()+10*60*1000
+    
+    console.log({token},this.passwordResetToken,this.passwordResetExpires)
 }
 ////////////////////////////////////////////////////////////User model
 const User = mongoose.model('User',userSchema)
