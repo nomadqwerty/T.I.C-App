@@ -73,13 +73,16 @@ userSchema.methods.passwordChanged = function(JWTtimeStamp){
     return false
 }
 userSchema.methods.createPasswordResetToken = function(){
+// crearte reset token
     let token = crypto.randomBytes(32).toString('hex')
-
+// hash token
     this.passwordResetToken = crypto.createHash('sha256').update(token).digest('hex')
-
+// set token expires
     this.passwordResetExpires = Date.now()+10*60*1000
     
     console.log({token},this.passwordResetToken,this.passwordResetExpires)
+
+    return token
 }
 ////////////////////////////////////////////////////////////User model
 const User = mongoose.model('User',userSchema)

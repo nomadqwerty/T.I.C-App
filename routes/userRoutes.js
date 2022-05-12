@@ -13,6 +13,8 @@ userRouter.route('/login').post(authController.login)
 
 userRouter.route('/forgotPassword').post(authController.forgotPassword)
 
+userRouter.route('/resetPassword/:token').patch(authController.forgotPassword)
+
 // ///////////////////////////////////////
 userRouter.route('/').get(userController.getAllUsersHnd).post(userController.createUserHnd);
 userRouter
