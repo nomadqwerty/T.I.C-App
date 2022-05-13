@@ -1,5 +1,6 @@
 // node modules
 const promisify = require('util').promisify;
+const crypto = require('crypto');
 // 3rd party
 const express = require('express');
 const jwt = require('jsonwebtoken');
@@ -164,4 +165,65 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     // error return to global error middleware
     return next(new AppError('something went wrong please try again', 500));
   }
+});
+
+exports.resetPassword = catchAsync(async (req, res, next) => {
+  // hash token in req.params
+  const token = crypto
+    .createHash('sha256')
+    .update(req.params.token)
+    .digest('hex');
+  // find user based of token and passExprire gte now
+  const user = await User.findOne({
+    passwordResetToken: token,
+    passwordResetExpires: { $gte: Date.now() },
+  });
+  // if no user return app error
+  if (!user) {
+    return next(new AppError('invalid token or token has expired', 404));
+  }
+  // else set password ields and confirm field
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+
+  // set token and token expire to undefined
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+
+  // save user
+  await user.save();
+  // send jwt
+  const jwt = signToken(user._id);
+
+  res.status(200).json({
+    status: 'success',
+    jwt,
+    data: {},
+  });
+});
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  // get user from DataBase
+  const user = await User.findById(req.user.id).select('+password');
+
+  // check req.body.password is = user.password
+  let password = user.password;
+  let reqPass = req.body.password;
+  let compare = await user.comparePasswords(reqPass, password);
+
+  // if correct change password
+  if (compare) {
+    user.password = req.body.newPassword;
+    await user.save();
+  } else {
+    return next(new AppError('password is incorrect', 401));
+  }
+  // send jwt
+  const jwt = signToken(user._id);
+
+  res.status(200).json({
+    status: 'success',
+    jwt,
+    data: {},
+  });
 });
