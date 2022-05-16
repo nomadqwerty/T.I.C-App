@@ -18,6 +18,21 @@ const signToken = (id) => {
   });
 };
 
+// create and send token to user:f(n):user,statusCode,response object
+const createJWTAndRes = (user, statusCode, res) => {
+  const token = signToken(user._id);
+
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+  res.status(statusCode).json({
+    status: 'success',
+    token,
+    data: {
+      user,
+    },
+  });
+};
+
 exports.signUp = catchAsync(async (req, res, next) => {
   // filter unwanted data fields
   // new user data
@@ -29,23 +44,14 @@ exports.signUp = catchAsync(async (req, res, next) => {
     passwordChangedAt: req.body.passwordChangedAt,
     role: req.body.role,
   });
-
-  //    create JWT for auth
-  // login in use with jwt
-  const token = signToken(newUser._id);
-
   // error if user craetion failed
   if (!newUser) {
     next(new AppError('failed to create user', 400));
   }
+  //    create JWT for auth
+  // login in use with jwt
   //    return new user data
-  res.status(201).json({
-    status: 'success',
-    token,
-    data: {
-      newUser,
-    },
-  });
+  createJWTAndRes(newUser._id, 201, res);
 });
 
 ////////////login
@@ -64,13 +70,7 @@ exports.login = catchAsync(async (req, res, next) => {
   }
   //    create JWT for auth
   // login in use with jwt
-  const token = signToken(user._id);
-
-  res.status(200).json({
-    status: 'success',
-    token,
-    data: {},
-  });
+  createJWTAndRes(user, 200, res);
 });
 
 // protect middleware: check if user logged in
@@ -193,37 +193,33 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   // save user
   await user.save();
   // send jwt
-  const jwt = signToken(user._id);
-
-  res.status(200).json({
-    status: 'success',
-    jwt,
-    data: {},
-  });
+  createJWTAndRes(user, 200, res);
 });
 
+// update password:user
 exports.updatePassword = catchAsync(async (req, res, next) => {
   // get user from DataBase
-  const user = await User.findById(req.user.id).select('+password');
+  const user = await User.findById(req.user._id).select('+password');
 
   // check req.body.password is = user.password
   let password = user.password;
-  let reqPass = req.body.password;
+  let reqPass = req.body.oldPassword;
   let compare = await user.comparePasswords(reqPass, password);
 
   // if correct change password
   if (compare) {
-    user.password = req.body.newPassword;
+    let check = await user.comparePasswords(req.body.password, password);
+    // check if user changed password
+    if (check) {
+      return next(new AppError('please use a new password'), 400);
+    }
+    // update password
+    user.password = req.body.password;
+    user.passwordConfirm = req.body.passwordConfirm;
     await user.save();
   } else {
     return next(new AppError('password is incorrect', 401));
   }
   // send jwt
-  const jwt = signToken(user._id);
-
-  res.status(200).json({
-    status: 'success',
-    jwt,
-    data: {},
-  });
+  createJWTAndRes(user, 200, res);
 });
