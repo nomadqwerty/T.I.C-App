@@ -44,9 +44,15 @@ const userSchema = new mongoose.Schema({
   },
   passwordResetToken: String,
   passwordResetExpires: Date,
+  active: {
+    type: Boolean,
+    default: true,
+    select: false,
+  },
 });
 
 // pre-hook middleware hash password
+// doc middleware
 userSchema.pre('save', async function (next) {
   // function works if password was changed
   if (!this.isModified('password')) return;
@@ -68,6 +74,12 @@ userSchema.pre('save', function (next) {
   // incase password change is slower than jwt issuace minus 1000ms from date.now()
   // set password changed at
   this.passwordChangedAt = Date.now() - 1000;
+  next();
+});
+
+// query middleware
+userSchema.pre(/^find/, function (next) {
+  this.find({ active: { $ne: false } });
   next();
 });
 

@@ -22,7 +22,7 @@ const filteredBody = (obj, fields) => {
 ////////////
 // GET req
 exports.getAllUsersHnd = catchAsync(async (req, res) => {
-  const users = await User.find();
+  const users = await User.find().select('+active');
 
   res.status(200).json({
     // jsend format
@@ -103,3 +103,17 @@ exports.deleteUserHnd = (req, res) => {
     message: 'notyet defined',
   });
 };
+
+////////////////////
+//////delete user account
+// delete f(n){ find user by id({active:flase})}
+// add model middle,pre hooks on find-query
+exports.deleteMe = catchAsync(async (req, res, next) => {
+  await User.findByIdAndUpdate(req.user._id, { active: false });
+
+  // req.headers.authorization = undefined;
+
+  res.status(204).json({
+    status: 'success',
+  });
+});
