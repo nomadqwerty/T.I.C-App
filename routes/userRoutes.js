@@ -15,6 +15,7 @@ userRouter.route('/forgotPassword').post(authController.forgotPassword);
 
 userRouter.route('/resetPassword/:token').patch(authController.resetPassword);
 
+// protected user end point
 userRouter
   .route('/updateMyPassword')
   .patch(authController.protect, authController.updatePassword);
@@ -30,12 +31,32 @@ userRouter
 // ///////////////////////////////////////
 userRouter
   .route('/')
-  .get(userController.getAllUsersHnd)
-  .post(userController.createUserHnd);
+  .get(
+    authController.protect,
+    authController.restrictTo('admin'),
+    userController.getAllUsersHnd
+  )
+  .post(
+    authController.protect,
+    authController.restrictTo('admin'),
+    userController.createUserHnd
+  );
 userRouter
   .route('/:id')
-  .get(userController.getUserHnd)
-  .patch(userController.updateUserhnd)
-  .delete(userController.deleteUserHnd);
+  .get(
+    authController.protect,
+    authController.restrictTo('admin'),
+    userController.getUserHnd
+  )
+  .patch(
+    authController.protect,
+    authController.restrictTo('admin'),
+    userController.updateUserhnd
+  )
+  .delete(
+    authController.protect,
+    authController.restrictTo('admin'),
+    userController.deleteUserHnd
+  );
 
 module.exports = userRouter;
