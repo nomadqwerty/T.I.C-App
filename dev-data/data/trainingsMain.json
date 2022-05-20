@@ -1,0 +1,86 @@
+[
+  {
+    "location": {
+      "description": "PortHarcourt, Rivers State",
+      "type": "Point",
+      "coordinates": [-80.185942, 25.774772],
+      "address": "stadium road"
+    },
+    "images": ["tour-2-1.jpg", "tour-2-2.jpg", "tour-2-3.jpg"],
+
+    "_id": "5c88fa8cf4afda39709c2955",
+    "name": "The Impact Counsel",
+    "duration": 1,
+    "sessions": 1,
+    "startDate": [],
+    "startTime": "7:00AM",
+    "trainingType": "Personal",
+    "pastors": ["5c8a22c62f8fb814b56fa18b", "5c8a1f4e2f8fb814b56fa185"],
+    "summary": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "description": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\nIrure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "imageCover": "tour-2-cover.jpg"
+  },
+  {
+    "location": {
+      "description": "PortHarcourt, Rivers State",
+      "type": "Point",
+      "coordinates": [-80.185942, 25.774772],
+      "address": "stadium road"
+    },
+    "images": ["tour-2-1.jpg", "tour-2-2.jpg", "tour-2-3.jpg"],
+
+    "_id": "5c88fa8cf4afda39709c2956",
+    "name": "The Impact Basic Training",
+    "duration": 1,
+    "sessions": 1,
+    "startDate": [],
+    "startTime": "7:00AM",
+    "trainingType": "Basic",
+    "pastors": ["5c8a22c62f8fb814b56fa18b", "5c8a1f4e2f8fb814b56fa185"],
+    "summary": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "description": " tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "imageCover": "tour-2-cover.jpg"
+  },
+  {
+    "location": {
+      "description": "PortHarcourt, Rivers State",
+      "type": "Point",
+      "coordinates": [-80.185942, 25.774772],
+      "address": "stadium road"
+    },
+    "images": ["tour-2-1.jpg", "tour-2-2.jpg", "tour-2-3.jpg"],
+
+    "_id": "5c88fa8cf4afda39709c2957",
+    "name": "The Impact Advanced Training",
+    "duration": 1,
+    "sessions": 1,
+    "startDate": [],
+    "startTime": "7:00AM",
+    "trainingType": "Advanced",
+    "pastors": ["5c8a22c62f8fb814b56fa18b", "5c8a1f4e2f8fb814b56fa185"],
+    "summary": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "description": "upidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "imageCover": "tour-2-cover.jpg"
+  },
+  {
+    "location": {
+      "description": "PortHarcourt, Rivers State",
+      "type": "Point",
+      "coordinates": [-80.185942, 25.774772],
+      "address": "stadium road"
+    },
+    "images": ["tour-2-1.jpg", "tour-2-2.jpg", "tour-2-3.jpg"],
+
+    "_id": "5c88fa8cf4afda39709c2958",
+    "name": "The Impact Ministry Training",
+    "duration": 1,
+    "sessions": 1,
+    "startDate": [],
+    "startTime": "7:00AM",
+    "trainingType": "Ministry",
+    "pastors": ["5c8a22c62f8fb814b56fa18b", "5c8a1f4e2f8fb814b56fa185"],
+    "summary": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "description": "Cxcepteur snt occaecat cupidatat non proident, sunt in culpa qui offe velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "imageCover": "tour-2-cover.jpg"
+  }
+]

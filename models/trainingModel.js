@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
 const validator = require('validator');
+const User = require('./userModel');
 // ///////////////////////////////////
 // training schema
 const trainingSchema = new mongoose.Schema(
@@ -10,9 +11,8 @@ const trainingSchema = new mongoose.Schema(
       required: [true, 'Training needs a name'],
       unique: true,
       trim: true,
-      maxLength: [20, 'training name should be less the 20 characters'],
+      maxLength: [50, 'training name should be less the 50 characters'],
       minLength: [5, 'training name should be more than 5 characters'],
-      validate: [validator.isAlpha, 'name must contain only letters'],
     },
     slug: {
       type: String,
@@ -21,27 +21,31 @@ const trainingSchema = new mongoose.Schema(
       type: String,
       required: [true, 'training needs a type(sermon,training,counsel etc)'],
     },
+    pastors: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+      },
+    ],
     sessions: {
       type: Number,
       default: 1,
     },
     duration: {
       type: Number,
-      required: [true, 'training needs a duration'],
     },
     startTime: {
       type: String,
       required: [true, 'training needs a start time'],
     },
-    date: {
-      type: Date,
-      required: [true, 'conference needs a date'],
+    startDate: {
+      type: [String],
+      required: [true, 'Training needs a date'],
       default: '2022-10-19T08:43:31.096Z',
     },
     description: {
       type: String,
       required: [true, 'training needs a description'],
-      unique: true,
     },
     summary: {
       type: String,
@@ -70,6 +74,16 @@ const trainingSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    location: {
+      type: {
+        type: String,
+        default: 'Point',
+        enum: ['Point'],
+      },
+      coordinates: [Number],
+      address: String,
+      description: String,
+    },
   },
   {
     toJSON: { virtuals: true },
@@ -90,7 +104,18 @@ trainingSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
   next();
 });
+
+// embed doc middleware
+// trainingSchema.pre('save', async function (next) {
+//   const pastors = this.pastors.map(async (id) => {
+//     return await User.findById(id);
+//   });
+//   this.pastors = await Promise.all(pastors);
+
+//   next();
+// });
 // mongoose query middle ware:pre
+
 trainingSchema.pre(/^find/, function (next) {
   this.find({ secretTraining: { $ne: true } });
   next();
