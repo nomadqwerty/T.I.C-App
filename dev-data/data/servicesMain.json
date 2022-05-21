@@ -1,0 +1,77 @@
+[
+  {
+    "locations": [
+      {
+        "_id": "5c88fa8cf4afda39709c3975",
+        "description": "PortHarcourt, Rivers State",
+        "type": "Point",
+        "coordinates": [-80.185942, 25.774772],
+        "address": "stadium road"
+      }
+    ],
+    "images": ["tour-2-1.jpg", "tour-2-2.jpg", "tour-2-3.jpg"],
+
+    "_id": "5c88fa8cf4affc36709c2985",
+    "name": "The Impact Sunday Service",
+    "duration": 6,
+    "services": 3,
+    "date": "sunday",
+    "dateIndex": 0,
+    "startTime": "7:00AM",
+    "serviceType": "sunday sermon",
+    "pastors": [],
+    "summary": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "description": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\nIrure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "imageCover": "tour-2-cover.jpg"
+  },
+  {
+    "locations": [
+      {
+        "_id": "5c88fa8cf4afda39709c5975",
+        "description": "PortHarcourt, Rivers State",
+        "type": "Point",
+        "coordinates": [-80.185942, 25.774772],
+        "address": "stadium road"
+      }
+    ],
+    "images": ["tour-2-1.jpg", "tour-2-2.jpg", "tour-2-3.jpg"],
+
+    "_id": "5c88fa8cf4afda39709c2985",
+    "name": "The Impact Tuesday Service",
+    "duration": 3,
+    "services": 2,
+    "date": "Tuesday",
+    "dateIndex": 0,
+    "startTime": "5:00PM",
+    "serviceType": "Bible Study",
+    "pastors": [],
+    "summary": ",Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "description": ", sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\nIrure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "imageCover": "tour-2-cover.jpg"
+  },
+  {
+    "locations": [
+      {
+        "_id": "5c88fa8cf4afda39709c6975",
+        "description": "PortHarcourt, Rivers State",
+        "type": "Point",
+        "coordinates": [-80.185942, 25.774772],
+        "address": "stadium road"
+      }
+    ],
+    "images": ["tour-2-1.jpg", "tour-2-2.jpg", "tour-2-3.jpg"],
+
+    "_id": "5c68fa8cf4afda39709c2925",
+    "name": "The Impact Thurday Service",
+    "duration": 2,
+    "services": 1,
+    "date": "Thursday",
+    "dateIndex": 4,
+    "startTime": "7:00PM",
+    "serviceType": "Faith clinic",
+    "pastors": [],
+    "summary": ",Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "description": "ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\nIrure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "imageCover": "tour-2-cover.jpg"
+  }
+]

@@ -39,7 +39,7 @@ const connectDB = async () => {
 console.log(connectDB());
 
 // read file and write to dataBAse
-const services = JSON.parse(fs.readFileSync('./services-simple.json', 'utf-8'));
+const services = JSON.parse(fs.readFileSync('./servicesMain.json', 'utf-8'));
 const conferences = JSON.parse(
   fs.readFileSync('./conference-simple.json', 'utf-8')
 );

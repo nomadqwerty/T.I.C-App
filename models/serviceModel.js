@@ -10,9 +10,8 @@ const serviceSchema = new mongoose.Schema(
       required: [true, 'Service needs a name'],
       unique: true,
       trim: true,
-      maxLength: [20, 'service name should be less the 20 characters'],
+      maxLength: [50, 'service name should be less the 20 characters'],
       minLength: [5, 'service name should be more than 5 characters'],
-      validate: [validator.isAlpha, 'name must contain only letters'],
     },
     slug: {
       type: String,
@@ -25,6 +24,12 @@ const serviceSchema = new mongoose.Schema(
       type: Number,
       default: 1,
     },
+    pastors: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+      },
+    ],
     duration: {
       type: Number,
       required: [true, 'Service needs a duration'],
@@ -36,18 +41,6 @@ const serviceSchema = new mongoose.Schema(
     date: {
       type: String,
       required: [true, 'Service needs a date'],
-      enum: {
-        values: [
-          'monday',
-          'tuesday',
-          'wednesday',
-          'thursday',
-          'friday',
-          'saturday',
-          'sunday',
-        ],
-        message: 'must be a weekday',
-      },
     },
     dateIndex: {
       type: Number,
@@ -66,6 +59,18 @@ const serviceSchema = new mongoose.Schema(
       required: [true, 'Service needs a summary'],
       trim: true,
     },
+    locations: [
+      {
+        type: {
+          type: String,
+          default: 'Point',
+          enum: ['Point'],
+        },
+        coordinates: [Number],
+        address: String,
+        description: String,
+      },
+    ],
     zoomId: {
       type: Number,
       default: 123456,
