@@ -45,7 +45,7 @@ const conferences = JSON.parse(
 );
 const trainings = JSON.parse(fs.readFileSync('./trainingsMain.json', 'utf-8'));
 const departments = JSON.parse(
-  fs.readFileSync('./departments-simple.json', 'utf-8')
+  fs.readFileSync('./departmentsMain.json', 'utf-8')
 );
 
 // send data to db
