@@ -13,6 +13,7 @@ const globalErrorHandler = require('./controllers/errorController');
 
 // require user and service Routes modules
 const serviceRouter = require('./routes/serviceRoutes');
+const testimonieRouter = require('./routes/testimonieRoutes');
 const trainingRouter = require('./routes/trainingRoutes');
 const departmentRouter = require('./routes/departmentRoutes');
 const conferenceRouter = require('./routes/conferenceRoutes');
@@ -60,6 +61,7 @@ app.use(paramProtection);
 
 // /////
 app.use('/api/v1/services/', serviceRouter);
+app.use('/api/v1/testimonies/', testimonieRouter);
 app.use('/api/v1/trainings/', trainingRouter);
 app.use('/api/v1/departments/', departmentRouter);
 app.use('/api/v1/conferences/', conferenceRouter);

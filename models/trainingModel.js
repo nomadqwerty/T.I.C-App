@@ -120,6 +120,15 @@ trainingSchema.pre(/^find/, function (next) {
   this.find({ secretTraining: { $ne: true } });
   next();
 });
+// query middlewar to populated child referenced fields
+trainingSchema.pre(/^find/, function (next) {
+  // fill field that references the id with the actual object
+  this.populate({
+    path: 'pastors',
+    select: '-__v -passwordChangedAt -role -_id',
+  });
+  next();
+});
 ////////////mongoose Aggregation middles
 trainingSchema.pre('aggregate', function (next) {
   this._pipeline.unshift({ $match: { secretTraining: { $ne: true } } });
