@@ -41,7 +41,7 @@ console.log(connectDB());
 // read file and write to dataBAse
 const services = JSON.parse(fs.readFileSync('./servicesMain.json', 'utf-8'));
 const conferences = JSON.parse(
-  fs.readFileSync('./conference-simple.json', 'utf-8')
+  fs.readFileSync('./conferenceMain.json', 'utf-8')
 );
 const trainings = JSON.parse(fs.readFileSync('./trainingsMain.json', 'utf-8'));
 const departments = JSON.parse(
