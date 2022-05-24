@@ -7,6 +7,7 @@ const Service = require('../../models/serviceModel');
 const Conference = require('../../models/conferenceModel');
 const Training = require('../../models/trainingModel');
 const Department = require('../../models/departmentModel');
+const Testimonies = require('../../models/testimonieModel');
 
 ////// require dotenv:set node enviroment variables
 const dotenv = require('dotenv');
@@ -94,6 +95,9 @@ if (process.argv[2] === '--importDepartment') {
   importData(Department, departments);
 } else if (process.argv[2] === '--deleteDepartment') {
   deleteData(Department);
+}
+if (process.argv[2] === '--deleteTestimonies') {
+  deleteData(Testimonies);
 }
 
 // node importDevData.js --importService,node importDevData.js --deleteService
