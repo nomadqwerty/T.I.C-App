@@ -7,7 +7,10 @@ const Testimonies = require('../models/testimonieModel');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getAllTestimoniesHnd = catchAsync(async (req, res, next) => {
-  const features = new ApiFeatures(Testimonies.find(), req.query)
+  const features = new ApiFeatures(
+    Testimonies.find({ training: req.params.trainingId }),
+    req.query
+  )
     .filter()
     .sort()
     .limitFields()
@@ -25,14 +28,15 @@ exports.getAllTestimoniesHnd = catchAsync(async (req, res, next) => {
 ////////////////
 // POST
 exports.createTestimonieHnd = catchAsync(async (req, res, next) => {
-  req.body.user = req.user._id;
-  let serviceName = req.body.serviceName.toLowerCase();
-  if (serviceName.includes('training')) {
-    req.body.training = '5c88fa8cf4afda39709c2956';
-  }
+  if (!req.body.training) req.body.training = req.params.trainingId;
+  if (!req.body.user) req.body.user = req.user._id;
+
+  // let serviceName = req.body.serviceName.toLowerCase();
+  // if (serviceName.includes('training')) {
+  //   req.body.training = '5c88fa8cf4afda39709c2956';
+  // }
 
   const newTestimonie = await Testimonies.create(req.body);
-  console.log(req.body);
 
   if (!newTestimonie) {
     return next(new AppError('failed to create new text', 404));

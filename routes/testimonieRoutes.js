@@ -6,7 +6,7 @@ const authController = require('../controllers/authController');
 
 //////////////////////////////////////////////////////////////////////
 //create instance of Router() Object
-const testRouter = express.Router();
+const testRouter = express.Router({ mergeParams: true });
 
 testRouter
   .route('/')

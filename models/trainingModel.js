@@ -91,6 +91,12 @@ const trainingSchema = new mongoose.Schema(
   }
 );
 
+// virtual populate
+trainingSchema.virtual('testimonies', {
+  ref: 'Testimonie',
+  foreignField: 'training',
+  localField: '_id',
+});
 // virtual fields
 trainingSchema.virtual('durationInWeeks').get(function () {
   return this.sessions * 7;

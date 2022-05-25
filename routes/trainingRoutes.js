@@ -3,11 +3,13 @@ const express = require('express');
 // local module:serviceContoller required
 const trainingController = require('../controllers/trainingController');
 const authController = require('../controllers/authController');
-
+const testimonieRouter = require('./testimonieRoutes');
 //////////////////////////////////////////////////////////////////////
 //create instance of Router() Object
 const trainingRouter = express.Router();
 
+// merge params
+trainingRouter.use('/:trainingId/testimonie', testimonieRouter);
 ////////////aggregate pip routes
 trainingRouter.route('/upcoming-training').get(trainingController.getUpcoming);
 
@@ -36,5 +38,7 @@ trainingRouter
     authController.restrictTo('admin'),
     trainingController.deleteTrainingHnd
   );
+
+// nested routes
 
 module.exports = trainingRouter;
