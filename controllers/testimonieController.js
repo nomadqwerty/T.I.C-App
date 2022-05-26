@@ -5,6 +5,7 @@ const AppError = require('../utils/AppError');
 const ApiFeatures = require('../utils/ApiFeatures');
 const Testimonies = require('../models/testimonieModel');
 const catchAsync = require('../utils/catchAsync');
+const defaultController = require('./defaultController');
 
 exports.getAllTestimoniesHnd = catchAsync(async (req, res, next) => {
   const features = new ApiFeatures(
@@ -27,10 +28,12 @@ exports.getAllTestimoniesHnd = catchAsync(async (req, res, next) => {
 });
 ////////////////
 // POST
-exports.createTestimonieHnd = catchAsync(async (req, res, next) => {
+exports.setReqparams = (req, res, next) => {
   if (!req.body.training) req.body.training = req.params.trainingId;
   if (!req.body.user) req.body.user = req.user._id;
-
+  next();
+};
+exports.createTestimonieHnd = catchAsync(async (req, res, next) => {
   // let serviceName = req.body.serviceName.toLowerCase();
   // if (serviceName.includes('training')) {
   //   req.body.training = '5c88fa8cf4afda39709c2956';
@@ -49,3 +52,5 @@ exports.createTestimonieHnd = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+exports.deleteTestimonie = defaultController.deleteOne(Testimonies);

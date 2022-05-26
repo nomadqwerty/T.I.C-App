@@ -8,97 +8,25 @@ const ApiFeatures = require('../utils/ApiFeatures');
 const AppError = require('../utils/AppError');
 const Training = require('../models/trainingModel');
 const catchAsync = require('../utils/catchAsync');
-
+const defaultController = require('./defaultController');
 /////////////////////
 // request handlers(Hnd)CRUD OPS
 ////////////
 // GET req
-exports.getAllTrainingsHnd = catchAsync(async (req, res, next) => {
-  let features = new ApiFeatures(Training.find(), req.query)
-    .filter()
-    .sort()
-    .limitFields()
-    .pagination();
-  const trainings = await features.query;
-
-  res.status(200).json({
-    status: 'success',
-    results: trainings.length,
-    data: {
-      trainings,
-    },
-  });
-});
-
+exports.getAllTrainingsHnd = defaultController.getAll(Training);
 ////////////
 // GET/:byParams requests
-exports.getTrainingHnd = catchAsync(async (req, res, next) => {
-  const training = await Training.findById(req.params.id);
-
-  if (!training) {
-    return next(new AppError('no training found', 404));
-  }
-
-  res.status(200).json({
-    // jsend format
-    status: 'success',
-    data: {
-      training,
-    },
-  });
-});
-
+exports.getTrainingHnd = defaultController.getOne(Training);
 ////////////////
 // POST
-exports.createTrainingHnd = catchAsync(async (req, res, next) => {
-  const newTraining = await Training.create(req.body);
-
-  if (!newTraining) {
-    return next(new AppError('failed to create training', 404));
-  }
-
-  res.status(201).json({
-    status: 'success',
-    data: {
-      newTraining,
-    },
-  });
-});
-
+exports.createTrainingHnd = defaultController.createOne(Training);
 ///////////////
 // PATCH requests
-exports.updateTrainingHnd = catchAsync(async (req, res, next) => {
-  const training = await Training.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
-
-  if (!training) {
-    return next(new AppError('failed to update training', 404));
-  }
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      training,
-    },
-  });
-});
+exports.updateTrainingHnd = defaultController.updateOne(Training);
 
 ///////////////
 // DELETE request
-exports.deleteTrainingHnd = catchAsync(async (req, res, next) => {
-  const training = await Training.findByIdAndDelete(req.params.id);
-
-  if (!training) {
-    return next(new AppError('failed to delete training', 404));
-  }
-
-  res.status(204).json({
-    status: 'success',
-    data: null,
-  });
-});
+exports.deleteTrainingHnd = defaultController.deleteOne(Training);
 
 // aggregat pipelines
 exports.getUpcoming = catchAsync(async (req, res, next) => {

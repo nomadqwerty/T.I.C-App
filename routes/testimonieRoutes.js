@@ -11,5 +11,17 @@ const testRouter = express.Router({ mergeParams: true });
 testRouter
   .route('/')
   .get(testimonieController.getAllTestimoniesHnd)
-  .post(authController.protect, testimonieController.createTestimonieHnd);
+  .post(
+    authController.protect,
+    testimonieController.setReqparams,
+    testimonieController.createTestimonieHnd
+  );
+
+testRouter
+  .route('/:id')
+  .delete(
+    authController.protect,
+    authController.restrictTo('admin'),
+    testimonieController.deleteTestimonie
+  );
 module.exports = testRouter;
