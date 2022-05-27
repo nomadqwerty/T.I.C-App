@@ -89,7 +89,15 @@ departmentSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
   next();
 });
-
+// query middlewar to populated child referenced fields
+departmentSchema.pre(/^find/, function (next) {
+  // fill field that references the id with the actual object
+  this.populate({
+    path: 'departmentalHeads',
+    select: '-__v -passwordChangedAt -role -_id',
+  });
+  next();
+});
 /////////////////////////////////////////////////////// departmentModel
 const Department = mongoose.model('Department', departmentSchema);
 

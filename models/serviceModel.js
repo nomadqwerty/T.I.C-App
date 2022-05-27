@@ -116,6 +116,15 @@ serviceSchema.pre(/^find/, function (next) {
 serviceSchema.post(/^find/, function (docs, next) {
   next();
 });
+// query middlewar to populated child referenced fields
+serviceSchema.pre(/^find/, function (next) {
+  // fill field that references the id with the actual object
+  this.populate({
+    path: 'pastors',
+    select: '-__v -passwordChangedAt -role -_id',
+  });
+  next();
+});
 
 ////////////mongoose Aggregation middles
 serviceSchema.pre('aggregate', function (next) {

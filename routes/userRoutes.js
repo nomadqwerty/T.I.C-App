@@ -10,53 +10,29 @@ const userRouter = express.Router();
 
 userRouter.route('/signup').post(authController.signUp);
 userRouter.route('/login').post(authController.login);
-
+userRouter.route('/resetPassword/:token').patch(authController.resetPassword);
 userRouter.route('/forgotPassword').post(authController.forgotPassword);
 
-userRouter.route('/resetPassword/:token').patch(authController.resetPassword);
+userRouter.use(authController.protect);
+userRouter.route('/me').get(userController.setMe, userController.getMe);
 
 // protected user end point
-userRouter
-  .route('/updateMyPassword')
-  .patch(authController.protect, authController.updatePassword);
+userRouter.route('/updateMyPassword').patch(authController.updatePassword);
 
-userRouter
-  .route('/updateMe')
-  .patch(authController.protect, userController.updateMe);
+userRouter.route('/updateMe').patch(userController.updateMe);
 
-userRouter
-  .route('/deleteMe')
-  .delete(authController.protect, userController.deleteMe);
+userRouter.route('/deleteMe').delete(userController.deleteMe);
 
 // ///////////////////////////////////////
+userRouter.use(authController.restrictTo('admin'));
 userRouter
   .route('/')
-  .get(
-    authController.protect,
-    authController.restrictTo('admin'),
-    userController.getAllUsersHnd
-  )
-  .post(
-    authController.protect,
-    authController.restrictTo('admin'),
-    userController.createUserHnd
-  );
+  .get(userController.getAllUsersHnd)
+  .post(userController.createUserHnd);
 userRouter
   .route('/:id')
-  .get(
-    authController.protect,
-    authController.restrictTo('admin'),
-    userController.getUserHnd
-  )
-  .patch(
-    authController.protect,
-    authController.restrictTo('admin'),
-    userController.updateUserhnd
-  )
-  .delete(
-    authController.protect,
-    authController.restrictTo('admin'),
-    userController.deleteUserHnd
-  );
+  .get(userController.getUserHnd)
+  .patch(userController.updateUserhnd)
+  .delete(userController.deleteUserHnd);
 
 module.exports = userRouter;

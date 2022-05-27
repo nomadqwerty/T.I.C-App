@@ -103,6 +103,15 @@ conferenceSchema.pre(/^find/, function (next) {
   this.find({ familyConference: { $ne: true } });
   next();
 });
+// query middlewar to populated child referenced fields
+conferenceSchema.pre(/^find/, function (next) {
+  // fill field that references the id with the actual object
+  this.populate({
+    path: 'pastors',
+    select: '-__v -passwordChangedAt -role -_id',
+  });
+  next();
+});
 
 ////////////mongoose Aggregation middles
 conferenceSchema.pre('aggregate', function (next) {

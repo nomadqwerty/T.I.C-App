@@ -5,6 +5,7 @@ const User = require('../models/userModel');
 // error handler modules
 const AppError = require('../utils/AppError');
 const catchAsync = require('../utils/catchAsync');
+const defaultController = require('./defaultController');
 
 ////////////////////////////////////////////////////////////
 const filteredBody = (obj, fields) => {
@@ -67,7 +68,11 @@ exports.updateUserhnd = (req, res) => {
     message: 'notyet defined',
   });
 };
-
+exports.setMe = (req, res, next) => {
+  req.params.id = req.user.id;
+  next();
+};
+exports.getMe = defaultController.getOne(User);
 ///////////////
 // update user
 exports.updateMe = catchAsync(async (req, res, next) => {
