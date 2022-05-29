@@ -19,9 +19,11 @@ testRouter
 
 testRouter
   .route('/:id')
+  .get(testimonieController.getTestimonieHnd)
+  .patch(authController.protect, testimonieController.updateTestimonieHnd)
   .delete(
     authController.protect,
     authController.restrictTo('admin'),
-    testimonieController.deleteTestimonie
+    testimonieController.deleteTestimonieHnd
   );
 module.exports = testRouter;

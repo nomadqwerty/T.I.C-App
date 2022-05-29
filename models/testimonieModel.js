@@ -23,12 +23,6 @@ let testimonieSchema = new mongoose.Schema(
         ref: 'User',
       },
     ],
-    training: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Training',
-      },
-    ],
   },
   {
     toJSON: { virtuals: true },
@@ -41,12 +35,7 @@ testimonieSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'user',
     select: '-__v -passwordChangedAt -role -_id',
-  }).populate({
-    path: 'training',
-    select:
-      '-__v -trainingType -sessions -duration -startTime -zoomId -facebookPage -location -images -secretTraining -createdAt -durationPerSession -durationInWeeks -slug -id -_id',
   });
-
   next();
 });
 /////////////////////////////////////////////////////// ServiceModel

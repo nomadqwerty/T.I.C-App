@@ -57,8 +57,6 @@ exports.signUp = catchAsync(async (req, res, next) => {
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
-    passwordChangedAt: req.body.passwordChangedAt,
-    role: req.body.role,
   });
   // error if user craetion failed
   if (!newUser) {

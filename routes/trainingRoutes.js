@@ -9,7 +9,7 @@ const testimonieRouter = require('./testimonieRoutes');
 const trainingRouter = express.Router();
 
 // merge params
-trainingRouter.use('/:trainingId/testimonie', testimonieRouter);
+// trainingRouter.use('/:trainingId/testimonie', testimonieRouter);
 ////////////aggregate pip routes
 trainingRouter.route('/upcoming-training').get(trainingController.getUpcoming);
 
