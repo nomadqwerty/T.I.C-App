@@ -133,7 +133,7 @@ serviceSchema.pre('aggregate', function (next) {
 });
 /////////////////////////////////////////
 //////// static methods
-serviceSchema.static.calcAvgDur = function () {
+serviceSchema.statics.calcAvgDur = function () {
   this.aggregate([
     {
       $match: { duration: { $gte: 2 } },
