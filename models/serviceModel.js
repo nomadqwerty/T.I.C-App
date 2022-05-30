@@ -131,6 +131,21 @@ serviceSchema.pre('aggregate', function (next) {
   this._pipeline.unshift({ $match: { familyService: { $ne: true } } });
   next();
 });
+/////////////////////////////////////////
+//////// static methods
+serviceSchema.static.calcAvgDur = function () {
+  this.aggregate([
+    {
+      $match: { duration: { $gte: 2 } },
+    },
+    {
+      $group: {
+        _id: '$name',
+        nServices: { $count: {} },
+      },
+    },
+  ]);
+};
 /////////////////////////////////////////////////////// ServiceModel
 const Service = mongoose.model('Service', serviceSchema);
 

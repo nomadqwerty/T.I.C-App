@@ -89,6 +89,8 @@ const conferenceSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+
+conferenceSchema.index({ date: 1, duration: 1, slug: 1 });
 // virtual fields
 conferenceSchema.virtual('durationInMinutes').get(function () {
   return this.duration * 60;

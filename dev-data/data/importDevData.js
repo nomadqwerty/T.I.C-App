@@ -8,6 +8,7 @@ const Conference = require('../../models/conferenceModel');
 const Training = require('../../models/trainingModel');
 const Department = require('../../models/departmentModel');
 const Testimonies = require('../../models/testimonieModel');
+const User = require('../../models/userModel');
 
 ////// require dotenv:set node enviroment variables
 const dotenv = require('dotenv');
@@ -45,6 +46,8 @@ const conferences = JSON.parse(
   fs.readFileSync('./conferenceMain.json', 'utf-8')
 );
 const trainings = JSON.parse(fs.readFileSync('./trainingsMain.json', 'utf-8'));
+const testimonie = JSON.parse(fs.readFileSync('./testimonies.json', 'utf-8'));
+const users = JSON.parse(fs.readFileSync('./users.json', 'utf-8'));
 const departments = JSON.parse(
   fs.readFileSync('./departmentsMain.json', 'utf-8')
 );
@@ -96,8 +99,15 @@ if (process.argv[2] === '--importDepartment') {
 } else if (process.argv[2] === '--deleteDepartment') {
   deleteData(Department);
 }
-if (process.argv[2] === '--deleteTestimonies') {
+if (process.argv[2] === '--importTestimonies') {
+  importData(Testimonies, testimonie);
+} else if (process.argv[2] === '--deleteTestimonies') {
   deleteData(Testimonies);
+}
+if (process.argv[2] === '--importUsers') {
+  importData(User, users);
+} else if (process.argv[2] === '--deleteUsers') {
+  deleteData(User);
 }
 
 // node importDevData.js --importService,node importDevData.js --deleteService
