@@ -131,21 +131,30 @@ serviceSchema.pre('aggregate', function (next) {
   this._pipeline.unshift({ $match: { familyService: { $ne: true } } });
   next();
 });
-/////////////////////////////////////////
-//////// static methods
-serviceSchema.statics.calcAvgDur = function () {
-  this.aggregate([
-    {
-      $match: { duration: { $gte: 2 } },
-    },
-    {
-      $group: {
-        _id: '$name',
-        nServices: { $count: {} },
-      },
-    },
-  ]);
-};
+// /////////////////////////////////////////
+// //////// static methods
+// serviceSchema.statics.calcAvgDur = async function () {
+//   const info = await this.aggregate([
+//     {
+//       $match: { duration: { $gte: 2 } },
+//     },
+//     {
+//       $group: {
+//         _id: '$name',
+//         nServices: { $count: {} },
+//         avgDur: { $avg: '$duration' },
+//       },
+//     },
+//   ]);
+//   console.log(info);
+// };
+
+// serviceSchema.pre('save', function (next) {
+//   this.constructor.calcAvgDur();
+
+//   next();
+// });
+
 /////////////////////////////////////////////////////// ServiceModel
 const Service = mongoose.model('Service', serviceSchema);
 

@@ -38,6 +38,26 @@ testimonieSchema.pre(/^find/, function (next) {
   });
   next();
 });
+//////////////////////
+////static method
+testimonieSchema.statics.avgTestimonies = async function () {
+  const stats = await this.aggregate([
+    {
+      $match: { testimonie: { $gte: '' } },
+    },
+    {
+      $group: {
+        _id: '$serviceName',
+        nTestimonies: { $count: {} },
+      },
+    },
+  ]);
+  console.log(stats);
+};
+
+testimonieSchema.post('save', async function (next) {
+  await this.constructor.avgTestimonies();
+});
 /////////////////////////////////////////////////////// ServiceModel
 const Testimonie = mongoose.model('Testimonie', testimonieSchema);
 
