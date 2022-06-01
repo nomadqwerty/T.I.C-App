@@ -1,3 +1,5 @@
+// local Api
+const path = require('path');
 // 3rd party modules
 const express = require('express');
 const morgan = require('morgan');
@@ -21,6 +23,13 @@ const userRouter = require('./routes/userRoutes');
 // instance of the express module
 const app = express();
 
+// /express view engine set up
+// use express to select template engine ie:pug.js
+app.set('view engine', 'pug');
+// use express to set path to view folder
+app.set('views', path.join(__dirname, 'views'));
+// get static files and use them with express
+app.use(express.static(path.join(__dirname, 'public')));
 // GLOBAL MIDDLEWARE
 // secure http headers with helmet
 app.use(helmet());
@@ -59,6 +68,12 @@ app.use(paramProtection);
 // /////////////////////////////////////////////////////
 // mount router with middleware
 
+// rpute for pug rendering
+app.get('/', (req, res) => {
+  res.status(200).render('base', {
+    service: 'Sunday Service',
+  });
+});
 // /////
 app.use('/api/v1/services/', serviceRouter);
 app.use('/api/v1/testimonies/', testimonieRouter);

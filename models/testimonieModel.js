@@ -52,8 +52,9 @@ testimonieSchema.statics.avgTestimonies = async function () {
       },
     },
   ]);
-  console.log(stats);
 };
+// set mongo index
+testimonieSchema.index({ user: 1, serviceName: 1 }, { unique: true });
 
 testimonieSchema.post('save', async function (next) {
   await this.constructor.avgTestimonies();

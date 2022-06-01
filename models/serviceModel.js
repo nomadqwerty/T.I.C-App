@@ -48,6 +48,8 @@ const serviceSchema = new mongoose.Schema(
       select: false,
       min: [0, 'dateIndex should be >= 0'],
       max: [6, 'dateIndex should be <= 6'],
+      // set function
+      set: (val) => Math.round(val),
     },
     description: {
       type: String,
