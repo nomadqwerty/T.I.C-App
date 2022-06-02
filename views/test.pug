@@ -1,0 +1,17 @@
+    //- head meta data
+    head
+        title Imapct Church | #{service}
+        //- css files
+        link(rel="stylesheet" href= 'css/style.css')
+        //- set favicon
+        link(rel="icon" type='image/png' href='img/favicon2.png')
+    //- body data
+    body 
+        //- insert data parse to template route
+        //- use = or #{} to insert js or backend data
+        h1= service.toUpperCase()
+        //- unbuffered, for write slightly more complex javascript(use -)
+        //- i.e
+        - let engine = 'pug.js'
+        //- unbuffered 
+        h1= engine.toUpperCase()

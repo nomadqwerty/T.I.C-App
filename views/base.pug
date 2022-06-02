@@ -1,12 +1,39 @@
+//- pug template
+//- set doc type
 doctype html
-html
+//- html element
+html(lang="eng")
+    //- html.head
     head
-        title Imapct Church | #{service}
-        //- css files
-        link(rel="stylesheet" href= 'css/style.css')
-        //- set favicon
-        link(rel="icon" type='image/png' href='img/favicon2.png')
-    body 
-        h1= service.toUpperCase()
-        - let engine = 'pug.js'
-        h1= engine.toUpperCase()
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,700")
+        link(href="css/style.css" rel="stylesheet")
+        link(rel="shortcut icon" type="image/png" href="img/favicon2.png")
+        title T.I.C | #{service}
+    //- html.body
+    body
+        header.header
+            nav.nav.nav--tours
+                a.nav__el(href='#') All services
+            div.header__logo
+                img(src="img/icons8-globe-africa-windows-10-96.png" alt="T.I.C logo" )
+            nav.nav.nav--user
+                //- a.nav__el(href='#') My reservations
+                //- a.nav__el(href="#")
+                //-     img.nav__user-img(src="img/user.jpg" alt="User photo")
+                //-     span David
+                button.nav__el log in
+                button.nav__el.nav__el--cta sign up
+
+        main.main
+            h1= service
+
+        footer.footer
+            div.footer__logo
+                img(src="img/icons8-cathedral-100.png" alt="Natours logo")
+            ul.footer__nav
+                li:a(href="#") About us
+                li:a(href="#") Join T.I.C family
+                li:a(href="#") Contact
+            p.footer__copyright &copy; The Impact Church. Glory be to God
