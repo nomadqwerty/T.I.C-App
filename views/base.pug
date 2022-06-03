@@ -10,30 +10,15 @@ html(lang="eng")
         link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,700")
         link(href="css/style.css" rel="stylesheet")
         link(rel="shortcut icon" type="image/png" href="img/favicon2.png")
-        title T.I.C | #{service}
+        title T.I.C | #{title}
     //- html.body
     body
-        header.header
-            nav.nav.nav--tours
-                a.nav__el(href='#') All services
-            div.header__logo
-                img(src="img/icons8-globe-africa-windows-10-96.png" alt="T.I.C logo" )
-            nav.nav.nav--user
-                //- a.nav__el(href='#') My reservations
-                //- a.nav__el(href="#")
-                //-     img.nav__user-img(src="img/user.jpg" alt="User photo")
-                //-     span David
-                button.nav__el log in
-                button.nav__el.nav__el--cta sign up
+        //- to inlude sections seperated to another use includes. static content
+        include _header
 
-        main.main
-            h1= service
+        //- to be able to dynamically render other requested templates
+        //- use block content, so the external can over ride base block content
+        block content
+            h1= title
 
-        footer.footer
-            div.footer__logo
-                img(src="img/icons8-cathedral-100.png" alt="Natours logo")
-            ul.footer__nav
-                li:a(href="#") About us
-                li:a(href="#") Join T.I.C family
-                li:a(href="#") Contact
-            p.footer__copyright &copy; The Impact Church. Glory be to God
+        include _footer

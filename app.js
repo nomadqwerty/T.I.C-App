@@ -68,10 +68,22 @@ app.use(paramProtection);
 // /////////////////////////////////////////////////////
 // mount router with middleware
 
-// rpute for pug rendering
+// route for pug rendering
 app.get('/', (req, res) => {
   res.status(200).render('base', {
-    service: 'Sunday Service',
+    title: 'Impact family welcomes you',
+  });
+});
+// render overview
+app.get('/overview', (req, res, next) => {
+  res.status(200).render('overview', {
+    title: 'All services',
+  });
+});
+// render single tour
+app.get('/service', (req, res, next) => {
+  res.status(200).render('service', {
+    title: 'Impact Sunday Service',
   });
 });
 // /////
