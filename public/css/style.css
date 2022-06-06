@@ -156,13 +156,13 @@ body {
     linear,
     left top,
     right bottom,
-    from(rgba(125, 213, 111, 0.85)),
-    to(rgba(40, 180, 135, 0.85))
+    from(rgba(96, 85, 194, 0.85)),
+    to(rgb(35, 35, 179))
   );
   background-image: linear-gradient(
     to bottom right,
-    rgba(125, 213, 111, 0.85),
-    rgba(40, 180, 135, 0.85)
+    rgba(96, 85, 194, 0.85),
+    rgb(35, 35, 179)
   );
 }
 
@@ -231,11 +231,11 @@ body {
 }
 
 .btn--green {
-  background-color: #55c57a;
+  background-color: #555cc5;
   color: #fff;
 }
 .btn--green::after {
-  background-color: #55c57a;
+  background-color: #555cc5;
 }
 
 .btn--small {
@@ -1113,10 +1113,10 @@ body {
     linear,
     left top,
     right bottom,
-    from(#7dd56f),
-    to(#28b487)
+    from(#878ef3),
+    to(rgb(35, 35, 179))
   );
-  background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+  background-image: linear-gradient(to right bottom, #666ed6, rgb(35, 35, 179));
   opacity: 0.7;
 }
 .card__picture-img {

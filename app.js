@@ -14,6 +14,7 @@ const AppError = require('./utils/AppError');
 const globalErrorHandler = require('./controllers/errorController');
 
 // require user and service Routes modules
+const viewRouter = require('./routes/viewRoutes');
 const serviceRouter = require('./routes/serviceRoutes');
 const testimonieRouter = require('./routes/testimonieRoutes');
 const trainingRouter = require('./routes/trainingRoutes');
@@ -68,25 +69,8 @@ app.use(paramProtection);
 // /////////////////////////////////////////////////////
 // mount router with middleware
 
-// route for pug rendering
-app.get('/', (req, res) => {
-  res.status(200).render('base', {
-    title: 'Impact family welcomes you',
-  });
-});
-// render overview
-app.get('/overview', (req, res, next) => {
-  res.status(200).render('overview', {
-    title: 'All services',
-  });
-});
-// render single tour
-app.get('/service', (req, res, next) => {
-  res.status(200).render('service', {
-    title: 'Impact Sunday Service',
-  });
-});
 // /////
+app.use('/', viewRouter);
 app.use('/api/v1/services/', serviceRouter);
 app.use('/api/v1/testimonies/', testimonieRouter);
 app.use('/api/v1/trainings/', trainingRouter);
