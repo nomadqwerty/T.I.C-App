@@ -9,6 +9,7 @@ const catchAsync = require('../utils/catchAsync');
 
 exports.getOverview = catchAsync(async (req, res, next) => {
   const services = await Service.find();
+  console.log(services[0]);
   res.status(200).render('overview', {
     title: 'All services',
     services,

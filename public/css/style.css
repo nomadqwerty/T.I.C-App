@@ -156,13 +156,13 @@ body {
     linear,
     left top,
     right bottom,
-    from(rgba(96, 85, 194, 0.85)),
-    to(rgb(35, 35, 179))
+    from(rgba(96, 85, 194, 0.623)),
+    to(rgba(35, 35, 179, 0.644))
   );
   background-image: linear-gradient(
     to bottom right,
-    rgba(96, 85, 194, 0.85),
-    rgb(35, 35, 179)
+    rgba(96, 85, 194, 0.562),
+    rgba(35, 35, 179, 0.61)
   );
 }
 
@@ -1116,7 +1116,11 @@ body {
     from(#878ef3),
     to(rgb(35, 35, 179))
   );
-  background-image: linear-gradient(to right bottom, #666ed6, rgb(35, 35, 179));
+  background-image: linear-gradient(
+    to right bottom,
+    #666ed67c,
+    rgba(35, 35, 179, 0.562)
+  );
   opacity: 0.7;
 }
 .card__picture-img {
