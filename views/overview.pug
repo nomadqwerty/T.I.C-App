@@ -11,7 +11,7 @@ block content
                     div.card__header
                         div.card__picture
                             div.card__picture-overlay &nbsp;
-                            img.card__picture-img(src=`img/tours/${i.imageCover}` alt=`${i.name}`)
+                            img.card__picture-img(src=`/img/tours/${i.imageCover}` alt=`${i.name}`)
                         h3.heading-tertirary
                             span= i.name
                     div.card__details
@@ -19,19 +19,19 @@ block content
                         p.card__text= i.summary 
                         div.card__data
                             svg.card__icon
-                                use(xlink:href="img/icons.svg#icon-map-pin")
+                                use(xlink:href="/img/icons.svg#icon-map-pin")
                             span= `${i.locations[0].description}`
                         div.card__data
                             svg.card__icon
-                                use(xlink:href="img/icons.svg#icon-calendar")
+                                use(xlink:href="/img/icons.svg#icon-calendar")
                             span= i.date
                         div.card__data
                             svg.card__icon
-                                use(xlink:href="img/icons.svg#icon-flag")
+                                use(xlink:href="/img/icons.svg#icon-flag")
                             span= `${i.locations.length} ${i.locations.length>1?'locations':'location'}`
                         div.card__data
                             svg.card__icon
-                                use(xlink:href="img/icons.svg#icon-user")
+                                use(xlink:href="/img/icons.svg#icon-user")
                             span every body
 
                     div.card__footer
@@ -41,4 +41,4 @@ block content
                         p.card__ratings   
                             span.card__footer-value=`${i.services} ` 
                             span.card__footer-text= `services (${i.duration} hrs)`
-                        a.btn.btn--green.btn--small Details
+                        a.btn.btn--green.btn--small(href=`/services/${i.name}`) Details

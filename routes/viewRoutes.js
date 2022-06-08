@@ -6,6 +6,8 @@ const viewRouter = express.Router();
 viewRouter.get('/', viewController.getOverview);
 
 // render single tour
-viewRouter.get('/service', viewController.getservice);
+// viewRouter.get('/service', viewController.getservice);
+
+viewRouter.route('/services/:name').get(viewController.getservice);
 
 module.exports = viewRouter;
