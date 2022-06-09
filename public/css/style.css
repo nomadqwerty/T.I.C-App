@@ -1,5 +1,6 @@
 /* .heading-secondary */
 /* .overview-box__icon */
+/* .card__icon */
 :root {
   --section-rotate: 9vw;
 }
@@ -1170,7 +1171,7 @@ body {
 .card__icon {
   height: 2rem;
   width: 2rem;
-  fill: #55c57a;
+  fill: #3742a8;
 }
 .card__footer {
   background-color: #f7f7f7;

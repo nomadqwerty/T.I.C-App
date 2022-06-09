@@ -90,3 +90,14 @@ exports.getconference = catchAsync(async (req, res, next) => {
     conference,
   });
 });
+
+exports.getTraining = catchAsync(async (req, res, next) => {
+  console.log(req.params);
+  const training = await Training.findOne({ slug: req.params.slug });
+  console.log(training);
+  // pass into
+  res.status(200).render('training', {
+    title: training.name,
+    training,
+  });
+});

@@ -13,5 +13,6 @@ viewRouter.get('/overview-trainings', viewController.getOverviewTraining);
 
 viewRouter.route('/services/:slug').get(viewController.getservice);
 viewRouter.route('/conferences/:slug').get(viewController.getconference);
+viewRouter.route('/trainings/:slug').get(viewController.getTraining);
 
 module.exports = viewRouter;
