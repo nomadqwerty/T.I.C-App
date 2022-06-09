@@ -1,53 +1,48 @@
 //- to be able to extend the data on this temlate to base.
 //- use extends filename, eg below
 extends base
+//- add mixins
+mixin overviewBox(label,text,icon)
+  .overview-box__detail
+    svg.overview-box__icon
+      use(xlink:href=`/img/icons.svg#icon-${icon}`)
+    span.overview-box__label= label
+    span.overview-box__text= text
+
+
 block content
   section.section-header
     .header__hero
       .header__hero-overlay &nbsp;
-      img.header__hero-img(src='/img/tour-5-cover.jpg', alt='Tour 5')
+      img.header__hero-img(src=`/img/tours/${service.imageCover}`, alt=`${service.name}`)
 
     .heading-box
       h1.heading-primary
-        span The Park Camper Tour
+        span= service.name
       .heading-box__group
         .heading-box__detail
           svg.heading-box__icon
             use(xlink:href='/img/icons.svg#icon-clock')
-          span.heading-box__text 10 days
+          span.heading-box__text= service.startTime
         .heading-box__detail
           svg.heading-box__icon
             use(xlink:href='/img/icons.svg#icon-map-pin')
-          span.heading-box__text Las Vegas, USA
+          span.heading-box__text= service.locations[0].description
 
   section.section-description
     .overview-box
       div
         .overview-box__group
           h2.heading-secondary.ma-bt-lg Quick facts
-          .overview-box__detail
-            svg.overview-box__icon
-              use(xlink:href='/img/icons.svg#icon-calendar')
-            span.overview-box__label Next date
-            span.overview-box__text August 2021
-          .overview-box__detail
-            svg.overview-box__icon
-              use(xlink:href='/img/icons.svg#icon-trending-up')
-            span.overview-box__label Difficulty
-            span.overview-box__text Medium
-          .overview-box__detail
-            svg.overview-box__icon
-              use(xlink:href='/img/icons.svg#icon-user')
-            span.overview-box__label Participants
-            span.overview-box__text 10 people
-          .overview-box__detail
-            svg.overview-box__icon
-              use(xlink:href='/img/icons.svg#icon-star')
-            span.overview-box__label Rating
-            span.overview-box__text 4.9 / 5
 
+          +overviewBox('Preachers',`${service.pastors.length} Pastors`,'user')
+          +overviewBox('serice-type',`${service.serviceType}`,'star')
+          +overviewBox('Services',`${service.services} sermons`,'trending-up')
+          +overviewBox('Duration',`${service.duration} hrs`,'clock')
+          +overviewBox('Next date',`${service.date}`,'calendar')
+          
         .overview-box__group
-          h2.heading-secondary.ma-bt-lg Your tour guides
+          h2.heading-secondary.ma-bt-lg Your Teachers
           .overview-box__detail
             img.overview-box__img(src='/img/users/user-19.jpg', alt='Lead guide')
             span.overview-box__label Lead guide

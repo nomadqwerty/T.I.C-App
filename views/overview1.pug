@@ -6,7 +6,7 @@ extends base
 block content
     main.main
         div.card-container
-            each i in services
+            each i in conferences
                 div.card
                     div.card__header
                         div.card__picture
@@ -20,15 +20,15 @@ block content
                         div.card__data
                             svg.card__icon
                                 use(xlink:href="/img/icons.svg#icon-map-pin")
-                            span= `${i.locations[0].description}`
+                            span= `Port-Harcourt, Rivers state`
                         div.card__data
                             svg.card__icon
                                 use(xlink:href="/img/icons.svg#icon-calendar")
-                            span= i.date
+                            span= i.date.toLocaleString('en-us',{day:'numeric',month:'long',year:'numeric'})
                         div.card__data
                             svg.card__icon
                                 use(xlink:href="/img/icons.svg#icon-flag")
-                            span= `${i.locations.length} ${i.locations.length>1?'locations':'location'}`
+                            span= location
                         div.card__data
                             svg.card__icon
                                 use(xlink:href="/img/icons.svg#icon-user")
@@ -37,8 +37,8 @@ block content
                     div.card__footer
                         p 
                             span.card__footer-value
-                            span.card__footer-text= `service starts by ${i.startTime}`
+                            span.card__footer-text= `conference starts by ${i.startTime}`
                         p.card__ratings   
-                            span.card__footer-value=`${i.services} ` 
-                            span.card__footer-text= `services (${i.duration} hrs)`
-                        a.btn.btn--green.btn--small(href=`/services/${i.slug}`) Details
+                            span.card__footer-value=`POWER PACKED ` 
+                            span.card__footer-text= `conference (${i.duration} hrs)`
+                        a.btn.btn--green.btn--small(href=`/conferences/${i.slug}`) Details
