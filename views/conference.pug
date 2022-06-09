@@ -27,19 +27,18 @@ block content
         .heading-box__detail
           svg.heading-box__icon
             use(xlink:href='/img/icons.svg#icon-map-pin')
-          span.heading-box__text= Port Harcourt, Rivers state
+          span.heading-box__text Port Harcourt, Rivers state
 
-  //- section.section-description
-  //-   .overview-box
-  //-     div
-  //-       .overview-box__group
-  //-         h2.heading-secondary.ma-bt-lg Quick facts
+  section.section-description
+    .overview-box
+      div
+        .overview-box__group
+          h2.heading-secondary.ma-bt-lg Conference details
 
-  //-         +overviewBox('Preachers',`${service.pastors.length} Pastors`,'user')
-  //-         +overviewBox('serice-type',`${service.serviceType}`,'star')
-  //-         +overviewBox('Services',`${service.services} sermons`,'trending-up')
-  //-         +overviewBox('Duration',`${service.duration} hrs`,'clock')
-  //-         +overviewBox('Next date',`${service.date}`,'calendar')
+          +overviewBox('Preachers',`${conference.pastors.length} Pastors`,'user')
+          +overviewBox('conference-type',`${conference.conferenceType}`,'star')
+          +overviewBox('Duration',`${conference.duration} hrs`,'clock')
+          +overviewBox('Next date',`${conference.date.toLocaleString('en-us',{day:'numeric',month:'long',year:'numeric'})}`,'calendar')
           
   //-       .overview-box__group
   //-         h2.heading-secondary.ma-bt-lg Your Teachers

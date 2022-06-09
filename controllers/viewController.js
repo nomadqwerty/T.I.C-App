@@ -5,6 +5,7 @@ const AppError = require('../utils/AppError');
 const Testimonie = require('../models/testimonieModel');
 const Service = require('../models/serviceModel');
 const Conference = require('../models/conferenceModel');
+const Training = require('../models/trainingModel');
 
 const catchAsync = require('../utils/catchAsync');
 
@@ -15,20 +16,21 @@ exports.getRoot = catchAsync(async (req, res, next) => {
       imageCover: 'tour-2-cover.jpg',
       summary: `join Impact Conferences and see the manifestation of God in your life`,
       location: 'Port-Harcourt, Rivers State',
-      path: 'overview1',
+      path: 'overview-conferences',
     },
     {
       name: 'services',
       imageCover: 'tour-2-cover.jpg',
       summary: `join Impact Services and see the manifestation of God in your life`,
       location: 'Port-Harcourt, Rivers State',
-      path: 'overview',
+      path: 'overview-services',
     },
     {
       name: 'Impact Trainings',
       imageCover: 'tour-2-cover.jpg',
       summary: `join Impact Training and see the manifestation of God in your life`,
       location: 'Port-Harcourt, Rivers State',
+      path: 'overview-trainings',
     },
     {
       name: 'Impact Testimonies',
@@ -45,7 +47,7 @@ exports.getRoot = catchAsync(async (req, res, next) => {
 });
 exports.getOverview = catchAsync(async (req, res, next) => {
   const services = await Service.find();
-  res.status(200).render('overview', {
+  res.status(200).render('overviewServices', {
     title: 'All services',
     services,
   });
@@ -54,9 +56,17 @@ exports.getOverview = catchAsync(async (req, res, next) => {
 exports.getOverviewConference = catchAsync(async (req, res, next) => {
   const conferences = await Conference.find();
   console.log(conferences[0]);
-  res.status(200).render('overview1', {
+  res.status(200).render('overviewConferences', {
     title: 'All conferences',
     conferences,
+  });
+});
+exports.getOverviewTraining = catchAsync(async (req, res, next) => {
+  const trainings = await Training.find();
+  console.log(trainings[0]);
+  res.status(200).render('overviewTrainings', {
+    title: 'All trainings',
+    trainings,
   });
 });
 

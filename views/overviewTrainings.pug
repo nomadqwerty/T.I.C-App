@@ -1,0 +1,44 @@
+//- to be able to extend the data on this temlate to base.
+//- use extends filename, eg below
+extends base
+
+//- now we the overview block content to override the base block content
+block content
+    main.main
+        div.card-container
+            each i in trainings
+                div.card
+                    div.card__header
+                        div.card__picture
+                            div.card__picture-overlay &nbsp;
+                            img.card__picture-img(src=`/img/tours/${i.imageCover}` alt=`${i.name}`)
+                        h3.heading-tertirary
+                            span= i.name
+                    div.card__details
+                        h4.card__sub-heading= `register for ${i.name}`
+                        p.card__text= i.summary 
+                        div.card__data
+                            svg.card__icon
+                                use(xlink:href="/img/icons.svg#icon-map-pin")
+                            span= `Port-Harcourt, Rivers state`
+                        div.card__data
+                            //- svg.card__icon
+                            //-     use(xlink:href="/img/icons.svg#icon-calendar")
+                            //- span= i.date.toLocaleString('en-us',{day:'numeric',month:'long',year:'numeric'})
+                        div.card__data
+                            svg.card__icon
+                                use(xlink:href="/img/icons.svg#icon-flag")
+                            span= location
+                        div.card__data
+                            svg.card__icon
+                                use(xlink:href="/img/icons.svg#icon-user")
+                            span every body
+
+                    div.card__footer
+                        p 
+                            span.card__footer-value
+                            span.card__footer-text= `Training starts by ${i.startTime}`
+                        p.card__ratings   
+                            span.card__footer-value=`POWER PACKED ` 
+                            span.card__footer-text= `Training (${i.duration} hrs)`
+                        a.btn.btn--green.btn--small(href=`/conferences/${i.slug}`) Details

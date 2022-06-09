@@ -3,9 +3,10 @@ const viewController = require('../controllers/viewController');
 const viewRouter = express.Router();
 
 // render overview
-viewRouter.get('/overview', viewController.getOverview);
-viewRouter.get('/overview1', viewController.getOverviewConference);
 viewRouter.get('/', viewController.getRoot);
+viewRouter.get('/overview-services', viewController.getOverview);
+viewRouter.get('/overview-conferences', viewController.getOverviewConference);
+viewRouter.get('/overview-trainings', viewController.getOverviewTraining);
 
 // render single tour
 // viewRouter.get('/service', viewController.getservice);
