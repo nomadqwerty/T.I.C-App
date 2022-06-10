@@ -33,16 +33,7 @@ const conferenceSchema = new mongoose.Schema(
       type: Number,
       required: [true, 'conference needs a duration'],
     },
-    location: {
-      type: {
-        type: String,
-        default: 'Point',
-        enum: ['Point'],
-      },
-      coordinates: [Number],
-      address: String,
-      description: String,
-    },
+
     startTime: {
       type: String,
       required: [true, 'conference needs a start time'],
@@ -82,6 +73,25 @@ const conferenceSchema = new mongoose.Schema(
     familyConference: {
       type: Boolean,
       default: false,
+    },
+    location: {
+      type: {
+        type: String,
+        default: 'Point',
+        enum: ['Point'],
+      },
+      coordinates: {
+        type: [Number],
+        default: [-80.185942, 25.774772],
+      },
+      address: {
+        type: String,
+        default: 'Stadium road',
+      },
+      description: {
+        type: String,
+        default: 'Port-Harcourt,Rivers',
+      },
     },
   },
   {
