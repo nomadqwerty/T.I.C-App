@@ -123,7 +123,7 @@ serviceSchema.pre(/^find/, function (next) {
   // fill field that references the id with the actual object
   this.populate({
     path: 'pastors',
-    select: '-__v -passwordChangedAt -role -_id',
+    select: '-__v -passwordChangedAt -_id',
   });
   next();
 });
