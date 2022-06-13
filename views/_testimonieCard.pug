@@ -1,0 +1,12 @@
+mixin testimonieCard()
+  each i in review
+    .reviews__card
+          .reviews__avatar
+            each x in i.user
+              img.reviews__avatar-img(src=`/img/users/${x.photo}`, alt=`${x.name}`)
+              h6.reviews__user= x.name
+          p.reviews__text= i.testimonie
+          .reviews__rating
+            each i in [1,2,3,4,5]
+              svg.reviews__star.reviews__star--active
+                use(xlink:href='/img/icons.svg#icon-star')

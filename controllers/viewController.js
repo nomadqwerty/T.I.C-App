@@ -9,6 +9,12 @@ const Training = require('../models/trainingModel');
 
 const catchAsync = require('../utils/catchAsync');
 
+const testimonies = async () => {
+  const tests = await Testimonie.find();
+
+  return tests;
+};
+
 exports.getRoot = catchAsync(async (req, res, next) => {
   const resources = [
     {
@@ -73,11 +79,12 @@ exports.getOverviewTraining = catchAsync(async (req, res, next) => {
 exports.getservice = catchAsync(async (req, res, next) => {
   console.log(req.params);
   const service = await Service.findOne({ slug: req.params.slug });
-  console.log(service);
+  const review = await testimonies();
   // pass into
   res.status(200).render('service', {
     title: service.name,
     service,
+    review,
   });
 });
 exports.getconference = catchAsync(async (req, res, next) => {
