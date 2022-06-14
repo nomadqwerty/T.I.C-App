@@ -1,8 +1,6 @@
 //- to be able to extend the data on this temlate to base.
 //- use extends filename, eg below
 extends base
-block append head
-  script(src='/js/mapbox.js' async)
 //- add mixins
 mixin overviewBox(label,text,icon)
   .overview-box__detail
@@ -12,71 +10,70 @@ mixin overviewBox(label,text,icon)
     span.overview-box__text= text
 
 include _testimonieCard
-          
 
 block content
   section.section-header
     .header__hero
       .header__hero-overlay &nbsp;
-      img.header__hero-img(src=`/img/tours/${service.imageCover}`, alt=`${service.name}`)
+      img.header__hero-img(src=`/img/tours/${department.imageCover}`, alt=`${department.name}`)
 
     .heading-box
       h1.heading-primary
-        span= service.name
+        span= department.name
       .heading-box__group
         .heading-box__detail
           svg.heading-box__icon
             use(xlink:href='/img/icons.svg#icon-clock')
-          span.heading-box__text= service.startTime
+          span.heading-box__text= `7:00AM`
         .heading-box__detail
           svg.heading-box__icon
             use(xlink:href='/img/icons.svg#icon-map-pin')
-          span.heading-box__text= service.locations[0].description
+          span.heading-box__text= department.location.description
 
   section.section-description
     .overview-box
       div
         .overview-box__group
-          h2.heading-secondary.ma-bt-lg Quick facts
+          h2.heading-secondary.ma-bt-lg Department details
 
-          +overviewBox('Preachers',`${service.pastors.length} Pastors`,'user')
-          +overviewBox('serice-type',`${service.serviceType}`,'star')
-          +overviewBox('Services',`${service.services} sermons`,'trending-up')
-          +overviewBox('Duration',`${service.duration} hrs`,'clock')
-          +overviewBox('Next date',`${service.date}`,'calendar')
-
-        each p in service.pastors  
+          +overviewBox('H.O.Ds',`${department.departmentalHeads.length} H.O.Ds`,'user')
+          +overviewBox('department-type',`${department.name}`,'star')
+          +overviewBox('meeting days',`${department.day} hrs`,'clock')
+          +overviewBox('Sessions',`once a week`,'clock')
+  
+        each p in department.departmentalHeads  
           .overview-box__group
-            h2.heading-secondary.ma-bt-lg Your Teachers
+            h2.heading-secondary.ma-bt-lg Your Departmental Heads
             .overview-box__detail
               img.overview-box__img(src=`/img/users/${p.photo}`, alt=`${p.role}`)
               - if(p.role)
                 span.overview-box__label= p.role.replace('-',' ')
               span.overview-box__text= p.name
-            
+
     .description-box
-      h2.heading-secondary.ma-bt-lg= `About ${service.name}`
-      p.description__text= service.description 
-      
+      h2.heading-secondary.ma-bt-lg= `About ${department.name}`
+      p.description__text= department.description 
+  
   section.section-pictures
-    each img,i in service.images
+    each img,i in department.images
       .picture-box
         img.picture-box__img(src=`/img/tours/${img}`, alt=`The Park Camper Tour ${i+1}`, class=`picture-box__img--${i+1}`)
-      
+  
 
-  section.section-map
-    #map(data-locations=`${JSON.stringify(service.locations)}`)
+  //- //- section.section-map
+  //- //-   #map
 
   section.section-reviews
     .reviews
       +testimonieCard()
-      
+  
+
   section.section-cta
     .cta
       .cta__img.cta__img--logo
         img(src='/img/icons8-globe-africa-windows-10-96.png', alt='png logo')
-      img.cta__img.cta__img--1(src=`/img/tours/${service.images[0]}`, alt=`${service.name}`)
-      img.cta__img.cta__img--2(src=`/img/tours/${service.images[1]}`, alt=`${service.name}`)
+      img.cta__img.cta__img--1(src=`/img/tours/${department.images[0]}`, alt=`${department.name}`)
+      img.cta__img.cta__img--2(src=`/img/tours/${department.images[1]}`, alt=`${department.name}`)
       .cta__content
         h2.heading-secondary What are you waiting for?
         p.cta__text Learn the word every day, grow in spirit and become a citizen in God's Kingdom!

@@ -1,6 +1,9 @@
 /* .heading-secondary */
 /* .overview-box__icon */
 /* .card__icon */
+/* .section-reviews */
+/* .reviews__star--active */
+/* .cta__img--logo */
 :root {
   --section-rotate: 9vw;
 }
@@ -588,10 +591,10 @@ body {
     linear,
     left top,
     right bottom,
-    from(#7dd56f),
-    to(#28b487)
+    from(#436eca),
+    to(#160c4e)
   );
-  background: linear-gradient(to right bottom, #7dd56f, #28b487);
+  background: linear-gradient(to right bottom, #436eca, #160c4e);
   clip-path: polygon(
     0 var(--section-rotate),
     100% 0,
@@ -676,7 +679,7 @@ body {
   margin-right: 1px;
 }
 .reviews__star--active {
-  fill: #55c57a;
+  fill: #160c4e;
 }
 .reviews__star--inactive {
   fill: #bbb;
@@ -726,10 +729,10 @@ body {
     linear,
     left top,
     right bottom,
-    from(#7dd56f),
-    to(#28b487)
+    from(#436eca),
+    to(#160c4e)
   );
-  background: linear-gradient(to right bottom, #7dd56f, #28b487);
+  background: linear-gradient(to right bottom, #436eca, #160c4e);
   z-index: 10;
   -webkit-transform: translate(-35%, -50%);
   transform: translate(-35%, -50%);

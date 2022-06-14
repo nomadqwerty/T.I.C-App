@@ -4,7 +4,7 @@ doctype html
 //- html element
 html(lang="eng")
     //- html.head
-    head
+    block head
         meta(charset="utf-8")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,700")
@@ -22,3 +22,6 @@ html(lang="eng")
             h1= title
 
         include _footer
+
+        //- script(src='/js/mapbox.js')
+        
