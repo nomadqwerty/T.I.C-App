@@ -136,3 +136,11 @@ exports.getDepartment = catchAsync(async (req, res, next) => {
     review,
   });
 });
+
+// login and signup is synchronous
+exports.login = (req, res, next) => {
+  res.status(200).render('login', {});
+};
+exports.signUp = (req, res, next) => {
+  res.status(200).render('signup', {});
+};

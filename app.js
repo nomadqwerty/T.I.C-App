@@ -8,6 +8,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xssClean = require('xss-clean');
 const hpp = require('hpp');
+const cookieParser = require('cookie-parser');
 // AppError class:A_E
 const AppError = require('./utils/AppError');
 // error contoller function
@@ -33,8 +34,42 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 // GLOBAL MIDDLEWARE
 // secure http headers with helmet
-app.use(helmet());
 
+app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'", 'data:', 'blob:'],
+
+      baseUri: ["'self'"],
+
+      fontSrc: ["'self'", 'https:', 'data:'],
+
+      scriptSrc: ["'self'", 'https://*.cloudflare.com'],
+
+      scriptSrc: ["'self'", 'https://*.stripe.com'],
+
+      scriptSrc: ["'self'", 'http:', 'https://*.mapbox.com', 'data:'],
+
+      frameSrc: ["'self'", 'https://*.stripe.com'],
+
+      objectSrc: ["'none'"],
+
+      styleSrc: ["'self'", 'https:', 'unsafe-inline'],
+
+      workerSrc: ["'self'", 'data:', 'blob:'],
+
+      childSrc: ["'self'", 'blob:'],
+
+      imgSrc: ["'self'", 'data:', 'blob:'],
+
+      connectSrc: ["'self'", 'blob:', 'https://*.mapbox.com'],
+
+      upgradeInsecureRequests: [],
+    },
+  })
+);
+app.use(cookieParser());
 // logger middlerware
 if (process.env.NODE_ENV === 'developement') {
   // 3rd party middleware:logger
@@ -66,6 +101,10 @@ const paramProtection = hpp({
   whitelist: list,
 });
 app.use(paramProtection);
+// app.use((req, res, next) => {
+//   console.log(req.cookies);
+//   next();
+// });
 // /////////////////////////////////////////////////////
 // mount router with middleware
 
