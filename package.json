@@ -22,6 +22,7 @@
     "hpp": "^0.2.3",
     "jsonwebtoken": "^8.5.1",
     "leaflet": "^1.8.0",
+    "mapbox": "^1.0.0-beta10",
     "mongoose": "^5.13.14",
     "morgan": "^1.10.0",
     "nodemailer": "^4.7.0",

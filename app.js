@@ -1,5 +1,6 @@
 // local Api
 const path = require('path');
+const cors = require('cors');
 // 3rd party modules
 const express = require('express');
 const morgan = require('morgan');
@@ -24,7 +25,7 @@ const conferenceRouter = require('./routes/conferenceRoutes');
 const userRouter = require('./routes/userRoutes');
 // instance of the express module
 const app = express();
-
+app.use(cors({ origin: true }));
 // /express view engine set up
 // use express to select template engine ie:pug.js
 app.set('view engine', 'pug');
@@ -78,6 +79,14 @@ if (process.env.NODE_ENV === 'developement') {
 // express middleware:body parser read data from request
 app.use(express.json({ limit: '25kb' }));
 // midleware for req time
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept '
+  );
+  next();
+});
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   next();
