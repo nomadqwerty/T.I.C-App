@@ -125,6 +125,30 @@ exports.protect = catchAsync(async (req, res, next) => {
   next();
 });
 
+exports.isLoggedin = catchAsync(async (req, res, next) => {
+  if (req.cookies.jwt) {
+    // verify token
+    const decoded = await promisify(jwt.verify)(
+      req.cookies.jwt,
+      process.env.JWT_SECRET
+    );
+    // check if user exists
+    const freshUser = await User.findById(decoded.id);
+
+    if (!freshUser) {
+      return next();
+    }
+    let passwordWasChanged = freshUser.passwordChanged(decoded.iat);
+    if (passwordWasChanged) {
+      return next();
+    }
+    res.local.user = freshUser;
+    console.log(res);
+    return next();
+  }
+  next();
+});
+
 // restrict middleware
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {

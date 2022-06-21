@@ -13,18 +13,12 @@ viewRouter.get('/overview-departments', viewController.getOverviewDepartment);
 // render single tour
 // viewRouter.get('/service', viewController.getservice);
 
-viewRouter
-  .route('/services/:slug')
-  .get(authController.protect, viewController.getservice);
-viewRouter
-  .route('/conferences/:slug')
-  .get(authController.protect, viewController.getconference);
-viewRouter
-  .route('/trainings/:slug')
-  .get(authController.protect, viewController.getTraining);
-viewRouter
-  .route('/departments/:slug')
-  .get(authController.protect, viewController.getDepartment);
+// viewRouter.use(authController.isLoggedin);
+
+viewRouter.route('/services/:slug').get(viewController.getservice);
+viewRouter.route('/conferences/:slug').get(viewController.getconference);
+viewRouter.route('/trainings/:slug').get(viewController.getTraining);
+viewRouter.route('/departments/:slug').get(viewController.getDepartment);
 viewRouter.route('/login').get(viewController.login);
 viewRouter.route('/signUp').get(viewController.signUp);
 
