@@ -7,14 +7,65 @@ const Service = require('../models/serviceModel');
 const Conference = require('../models/conferenceModel');
 const Training = require('../models/trainingModel');
 const Department = require('../models/departmentModel');
+const User = require('../models/userModel')
 
 const catchAsync = require('../utils/catchAsync');
+
+const jwt = require('jsonwebtoken');
 
 const testimonies = async () => {
   const tests = await Testimonie.find();
 
   return tests;
 };
+
+// jwt sign function
+const signToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES,
+  });
+};
+
+
+// Isioma //
+const createJWT = (user, statusCode, res) => {
+
+  try{
+    const token = signToken(user._id);
+
+    let cookieOptions = {
+      expires: new Date(
+        Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+      ),
+      httpOnly: true,
+    };
+    // send jwt in cookie
+    // set cookieOptions.secure to true in production
+    if (process.env.NODE_ENV === 'production') {
+      cookieOptions.secure = true;
+    }
+    res.cookie('jwt', token, cookieOptions);
+  
+    // set reset token and token expires to undefined
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+
+    return { 
+      token
+    }
+    // send response
+    // res.status(statusCode).json({
+    //   status: 'success',
+    //   token,
+    //   data: {
+    //     user,
+    //   },
+    // });
+  }catch(e){
+    console.log(e)
+  }
+};
+// Isioma //
 
 exports.getRoot = catchAsync(async (req, res, next) => {
   const resources = [
@@ -48,10 +99,31 @@ exports.getRoot = catchAsync(async (req, res, next) => {
     },
   ];
 
-  res.status(200).render('root', {
-    title: 'resources',
-    resources,
-  });
+  // Isioma //
+  try{
+    let loggedInUser = req.local && req.local.user
+
+    if (loggedInUser) {
+
+      return res.status(200).render('root', {
+        title: 'resources',
+        resources,
+        user: loggedInUser
+      });
+
+    }else{
+
+      return res.status(200).render('root', {
+        title: 'resources',
+        resources,
+      });
+
+    }
+  }catch(e){
+    console.log(e)
+  }
+  // Isioma //
+
 });
 exports.getOverview = catchAsync(async (req, res, next) => {
   const services = await Service.find();
@@ -137,9 +209,52 @@ exports.getDepartment = catchAsync(async (req, res, next) => {
   });
 });
 
+// Isioma //
+exports.postLogin = async (req, res, next) => {
+
+  try{
+    const email = req.body.email;
+    const password = req.body.password;
+  
+    if (!email && !password) {
+      //install express-flash to show user error messages
+      // return next(new AppError('please provide email and password', 400));
+      return res.redirect('/login');
+    }
+  
+    const user = await User.findOne({ email: email }).select('+password');
+  
+    if (!user || !(await user.comparePasswords(password, user.password))) {
+       //install express-flash to show user error messages
+      return res.redirect('/login');
+    }
+  
+    const { token } =  createJWT(user, 200, res)
+    
+    if (!user && !token){
+      return res.redirect('/login');
+    }
+
+    req.local = {}
+    req.local.user = user
+
+    // return res.render('/', {
+    //   user: user
+    // });
+    next()
+
+  }catch(e){
+    console.log(e)
+  }
+}
+// Isioma //
+
+
 // login and signup is synchronous
 exports.login = (req, res, next) => {
-  res.status(200).render('login', {});
+
+  res.status(200).render('login', { });
+
 };
 exports.signUp = (req, res, next) => {
   res.status(200).render('signup', {});

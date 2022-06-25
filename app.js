@@ -77,7 +77,12 @@ if (process.env.NODE_ENV === 'developement') {
   app.use(morgan('dev'));
 }
 // express middleware:body parser read data from request
-app.use(express.json({ limit: '25kb' }));
+app.use(express.json());
+
+//Isioma// -> added this to read the input from form submit
+app.use(express.urlencoded({ extended: true }));
+//Isioma//
+
 // midleware for req time
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');

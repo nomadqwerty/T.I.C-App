@@ -18,35 +18,42 @@ const signToken = (id) => {
   });
 };
 
+
+
 // create and send token to user:f(n):user,statusCode,response object
 const createJWTAndRes = (user, statusCode, res) => {
-  const token = signToken(user._id);
 
-  let cookieOptions = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true,
-  };
-  // send jwt in cookie
-  // set cookieOptions.secure to true in production
-  if (process.env.NODE_ENV === 'production') {
-    cookieOptions.secure = true;
+  try{
+    const token = signToken(user._id);
+
+    let cookieOptions = {
+      expires: new Date(
+        Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+      ),
+      httpOnly: true,
+    };
+    // send jwt in cookie
+    // set cookieOptions.secure to true in production
+    if (process.env.NODE_ENV === 'production') {
+      cookieOptions.secure = true;
+    }
+    res.cookie('jwt', token, cookieOptions);
+  
+    // set reset token and token expires to undefined
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+
+    // send response
+    res.status(statusCode).json({
+      status: 'success',
+      token,
+      data: {
+        user,
+      },
+    });
+  }catch(e){
+    console.log(e)
   }
-  res.cookie('jwt', token, cookieOptions);
-
-  // set reset token and token expires to undefined
-  user.passwordResetToken = undefined;
-  user.passwordResetExpires = undefined;
-
-  // send response
-  res.status(statusCode).json({
-    status: 'success',
-    token,
-    data: {
-      user,
-    },
-  });
 };
 
 exports.signUp = catchAsync(async (req, res, next) => {
@@ -67,6 +74,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
   //    return new user data
   createJWTAndRes(newUser._id, 201, res);
 });
+
 
 ////////////login
 exports.login = catchAsync(async (req, res, next) => {
@@ -126,27 +134,33 @@ exports.protect = catchAsync(async (req, res, next) => {
 });
 
 exports.isLoggedin = catchAsync(async (req, res, next) => {
-  if (req.cookies.jwt) {
-    // verify token
-    const decoded = await promisify(jwt.verify)(
-      req.cookies.jwt,
-      process.env.JWT_SECRET
-    );
-    // check if user exists
-    const freshUser = await User.findById(decoded.id);
-
-    if (!freshUser) {
+  try{
+    if (req.cookies.jwt) {
+      // verify token
+      const decoded = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
+      );
+      // check if user exists
+      const freshUser = await User.findById(decoded.id);
+  
+      if (!freshUser) {
+        return next();
+      }
+      let passwordWasChanged = freshUser.passwordChanged(decoded.iat);
+      if (passwordWasChanged) {
+        return next();
+      }
+      req.local = {}
+      req.local.user = freshUser;
       return next();
     }
-    let passwordWasChanged = freshUser.passwordChanged(decoded.iat);
-    if (passwordWasChanged) {
-      return next();
-    }
-    res.local.user = freshUser;
-    console.log(res);
-    return next();
+    next();
+  }catch(e){
+    console.log(e)
+    next()
   }
-  next();
+  
 });
 
 // restrict middleware

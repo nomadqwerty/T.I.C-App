@@ -1,7 +1,8 @@
 // server file for app set up
 ////// require dotenv:set node enviroment variables
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
 
+require('dotenv').config();
 // handle uncaught execeptions or synch code
 
 process.on('uncaughtException', (err) => {
@@ -21,8 +22,9 @@ const mongoose = require('mongoose');
 //the node process object holds the env which will hold the NODE_ENV property:process.env.NODE_ENV
 // OR
 // set enviroment variables with dotenv
-dotenv.config({ path: './config.env' });
+// dotenv.config({ path: './config.env' });
 console.log(process.env.NODE_ENV);
+console.log("Db string", process.env.DATABASE)
 
 // ////////////////////////////////////////////////////connect database to express app
 const connectDB = async () => {
@@ -31,17 +33,27 @@ const connectDB = async () => {
     process.env.DATBASE_PASSWORD
   );
   try {
-    const connect = await mongoose.connect(DB, {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    });
+    // const connect = await mongoose.connect(DB, {
+    //   useNewUrlParser: true,
+    //   useCreateIndex: true,
+    //   useFindAndModify: false,
+    // });
+
+    await mongoose.connect(DB, 
+      {
+          useNewUrlParser: true,
+          // useCreateIndex: true,
+          // useFindAndModify: false,
+          useUnifiedTopology: true
+      }
+    );
     console.log('database connected');
   } catch (err) {
     console.log(err);
   }
 };
-console.log(connectDB());
+
+connectDB()
 
 ////////////
 // server port

@@ -4,7 +4,7 @@ let signUp = async (email, name, password, passwordConfirm) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'http://127.0.0.1:3000/api/v1/user/signup',
+      url: 'http://localhost:8080/api/v1/user/signup',
       data: { email, name, password, passwordConfirm },
     });
     console.log(res);
